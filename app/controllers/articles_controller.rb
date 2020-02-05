@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
+  #cRud
   def show
     @article = Article.find(params[:id])
   end
@@ -12,7 +13,7 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  # crUd
+  
   def edit
     @article = Article.find(params[:id])
   end
@@ -29,8 +30,9 @@ class ArticlesController < ApplicationController
       render 'new'
     end
   end
-  
-  def update
+
+  #crUd
+  def update 
     @article = Article.find(params[:id])
    
     if @article.update(article_params)
@@ -38,6 +40,14 @@ class ArticlesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  #cruD
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+   
+    redirect_to articles_path
   end
 
   private

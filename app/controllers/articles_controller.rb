@@ -8,12 +8,19 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @article = Article.new
   end
 
   def create
     @article = Article.new(article_params)
-    @article.save
-    redirect_to @article
+
+    # inside the create action we use render instead of redirect_to when save returns false after we made validation.
+    if @article.save
+      redirect_to @article
+    else 
+      # The render method is used so that the @article object is passed back to the new template when it is rendered
+      render 'new'
+    end
   end
   private
     def article_params
